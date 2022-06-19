@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection</title>
+</head>
+test
+<button onclick="sendMessage()">send message</button>
+<input type="text" onchange="(e) => sendInputMessage(e)" >
+<body>
+    <script>
+        // const button = document.querySelector('button')
+        const input = document.querySelector('input')
+        const socket = new WebSocket('ws://localhost:8000')
+
+        socket.addEventListener('open', function (event) {
+            console.log('conncted to server')
+        })
+        socket.addEventListener('message', function (event) {
+            console.log('message from server ', event.data)
+        })
+
+        const sendMessage = () => {
+            socket.send('Im the frontend!')
+        }
+        const sendInputMessage = (e) => {
+            socket.send(e.target.value)
+        }
+        // button.addEventListener('click', sendMessage)
+        // input.addEventListener('input', sendInputMessage)
+        
+    </script>
+</body>
+</html>
